@@ -11,7 +11,7 @@ const App = () => {
 
 
   const hook = () => {
-    console.log('effect!')
+    console.log('effect')
     axios
       .get('http://localhost:3001/notes')
       .then(response => {
@@ -30,7 +30,6 @@ const App = () => {
         })
   }
   
-  console.log("testing new features branch")
   useEffect(hook, [])
   useEffect(getPersons, [])
 
