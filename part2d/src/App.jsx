@@ -30,7 +30,6 @@ const App = () => {
         })
   }
   
-  useEffect(hook, [])
   useEffect(getPersons, [])
 
   const notesToShow = showAll
@@ -49,12 +48,15 @@ const addNote = (event) => {
   const noteObject = {
     content: newNote,
     important: Math.random() < 0.5,
-    id: String(notes.length + 1),
-  }
 
-  setNotes(notes.concat(noteObject))
-  //this method does not mutate the state directly, it creates a new array with the new state value added and updates the current state value
-  setNewNote('') //reset value of state / reset input box value. to be ready to receive next note.
+  }
+  axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      console.log(response)
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
 }
 
 return (
@@ -69,7 +71,7 @@ return (
     </div>
     <ul>
       {notesToShow.map(note =>
-        <Note key={note.id} note={note} />
+        <Note key={note.id} note={note}  />
       )}
     </ul>
     <form onSubmit={addNote}>
