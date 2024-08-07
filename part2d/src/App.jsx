@@ -26,11 +26,13 @@ const App = () => {
         .get('http://localhost:3001/persons')
         .then((response) => {
           console.log("promise fulfulled")
+          console.log(response)
           setPersons(response.data)
+          console.log(persons)
         })
   }
   
-  useEffect(getPersons, [])
+  useEffect(hook, [])
 
   const notesToShow = showAll
   ? notes //if true set to notes
